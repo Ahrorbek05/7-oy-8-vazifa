@@ -18,32 +18,37 @@ function Input() {
 
   return (
     <div className="flex justify-between mt-16">
-      <input 
-        type="text" 
-        placeholder="Type to search..." 
-        className="input input-bordered w-72 p-3 max-h-12 rounded-md max-w-xs border-2" 
+      <input
+        type="text"
+        placeholder="Type to search..."
+        className="input input-bordered w-72 p-3 max-h-12 rounded-md max-w-xs border-2"
       />
-      <input 
-        type="text" 
-        placeholder="Type to search..." 
-        className="input input-bordered w-72 p-3 rounded-md max-h-12 max-w-xs border-2" 
+      <input
+        type="text"
+        placeholder="Type to search..."
+        className="input input-bordered w-72 p-3 rounded-md max-h-12 max-w-xs border-2"
       />
-      
+
       <div>
-        <p className='mt-[-36px] mb-2 text-lg font-bold'>To</p>
-        <div 
-          onClick={() => setOpenOptions(!openOptions)} 
+        <p className="mt-[-36px] mb-2 text-lg font-bold">To</p>
+        <div
+          onClick={() => setOpenOptions(!openOptions)}
           className="border-2 w-80 flex p-3 h-12 rounded justify-between cursor-pointer"
         >
-          {selected && (
+          {selected && !openOptions && (
             <>
-              <img src={selected.flag} alt={`${selected.name} flag`} className='w-8' />
+              <img src={selected.flag} alt={`${selected.name} flag`} className="w-8" />
               <span>
                 {selected.currencies && (
                   `${Object.keys(selected.currencies)[0]} - ${Object.values(selected.currencies)[0].name}`
                 )}
               </span>
             </>
+          )}
+          {openOptions && (
+            <label className="input input-bordered flex items-center gap-2">
+              <input type="text" className="grow outline-none" placeholder="Search" />
+            </label>
           )}
           <span>
             {!openOptions ? (
@@ -57,12 +62,12 @@ function Input() {
         {openOptions && (
           <ul className="options shadow-lg px-3 w-72 bg-white overflow-y-scroll h-80 rounded">
             {countriesData.map((country, index) => (
-              <li 
-                key={index} 
+              <li
+                key={index}
                 className="flex gap-5 mt-2 items-center cursor-pointer hover:bg-slate-300 text-sm"
                 onClick={() => handleSelectCountry(country)}
               >
-                <img src={country.flag} alt={`${country.name} flag`} className='w-8 h-6' />
+                <img src={country.flag} alt={`${country.name} flag`} className="w-8 h-6" />
                 <span>
                   {country.currencies && (
                     `${Object.keys(country.currencies)[0]} - ${Object.values(country.currencies)[0].name}`
